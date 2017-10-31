@@ -61,10 +61,10 @@ menu_top = SubMenu(u'Main Menu', [
         ]),
         Choice(u'Lock Screen'),
     ]),
-    SubMegc u(u'Print', [
+    SubMenu u(u'Print', [
         SubMenu(u'Setting Printer', [
             Choice(u'Text Editor'),
-            Choice(u'Terminal'),
+             Choice(u'Terminal'),
         ]),
         SubMenu(u'Print to PDF', [
             Choice(u'Text Editor'),

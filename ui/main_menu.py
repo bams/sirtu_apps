@@ -17,9 +17,14 @@ def menu(title, choices):
     return urwid.ListBox(urwid.SimpleFocusListWalker(body))
 
 def item_chosen(button):
-    response = urwid.Text([u'You chose ', button.label, u'\n'])
+    response = urwid.Text([u'Menu: ', button.label, u'\n'])
+
     done = menu_button(u'Ok', exit_program)
     top.open_box(urwid.Filler(urwid.Pile([response, done])))
+
+def do_pembelian_barang():
+    pass
+
 
 def item_chosen_exit(button):
     response = urwid.Text([u'Exit or Quit Apps? ', button.label, u'\n'])
@@ -32,7 +37,7 @@ def exit_program(button):
 menu_top = menu(u'Main Menu', [
     sub_menu(u'Applications', [
         sub_menu(u'Transaksi', [
-            menu_button(u'DO', item_chosen),
+            menu_button(u'Pembelian DO', item_chosen),
             menu_button(u'Pembayaran', item_chosen),
         ]),
         sub_menu(u'Laporan Transaksi', [
@@ -54,8 +59,9 @@ class CascadingBoxes(urwid.WidgetPlaceholder):
     max_box_levels = 4
 
     def __init__(self, box):
-        super(CascadingBoxes, self).__init__(urwid.SolidFill(u'\176'))
+        super(CascadingBoxes, self).__init__(urwid.SolidFill(u'0x167'))
         self.box_level = 0
+#         self.fill_form_do(box)
         self.open_box(box)
 #         self.open_dialog_box(box)
 
@@ -82,6 +88,15 @@ class CascadingBoxes(urwid.WidgetPlaceholder):
             bottom=(self.max_box_levels - self.box_level - 1) * 2)
         self.box_level += 1
 
+#     def fill_form_do(self, box):
+#         self.original_widget = urwid.Overlay(urwid.LineBox(box),
+#             align='center', width=('relative', 40),
+#             valign='middle', height=('relative', 40),
+#             min_width=24, min_height=8,
+#             left=self.box_level * 3,
+#             right=(self.max_box_levels - self.box_level - 1) * 3,
+#             top=self.box_level * 2
+#         self.box_level += 1
 
     def keypress(self, size, key):
         if key == 'esc' and self.box_level > 1:
